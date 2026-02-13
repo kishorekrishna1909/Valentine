@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atchu... Will You? 🐼💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fef5f8 0%, #fdeef3 25%, #fce8ef 50%, #fdeef3 75%, #fef5f8 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            padding: 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 8s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .bamboo {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: bambooSway 4s ease-in-out infinite;
+        }
+
+        @keyframes bambooSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(255, 105, 180, 0.3);
+            max-width: 650px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 192, 203, 0.5);
+            animation: containerFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .panda-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .panda {
+            font-size: 120px;
+            animation: pandaBounce 2s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        @keyframes pandaBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        .panda-hearts {
+            position: absolute;
+            font-size: 30px;
+            animation: floatingHeart 2s ease-in-out infinite;
+        }
+
+        .heart-left {
+            top: 10%;
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .heart-right {
+            top: 10%;
+            right: -20px;
+            animation-delay: 1s;
+        }
+
+        @keyframes floatingHeart {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-10px) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .from-text {
+            font-size: 18px;
+            color: #c2185b;
+            margin-top: 15px;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 52px;
+            color: #d63384;
+            margin: 30px 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(214, 51, 132, 0.2);
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .question {
+            font-size: 28px;
+            color: #c2185b;
+            margin-bottom: 50px;
+            font-weight: 600;
+            animation: questionFade 3s ease-in-out infinite;
+        }
+
+        @keyframes questionFade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .buttons-container {
+            position: relative;
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 20px 50px;
+            font-size: 26px;
+            font-weight: 700;
+            font-family: 'Quicksand', sans-serif;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: white;
+            animation: yesGlow 2s ease-in-out infinite;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.15) rotate(-3deg);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.4);
+        }
+
+        @keyframes yesGlow {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+            }
+            50% {
+                box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+            }
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+            color: #666;
+            position: absolute;
+            transition: all 0.2s ease-out;
+        }
+
+        .no-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .attempt-counter {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #c2185b;
+            font-weight: 600;
+            display: none;
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 20, 147, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: celebrationFade 0.5s ease-in;
+        }
+
+        @keyframes celebrationFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration-panda {
+            font-size: 200px;
+            animation: celebrateBounce 0.5s ease-in-out infinite;
+        }
+
+        @keyframes celebrateBounce {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(-10deg); }
+            75% { transform: scale(1.2) rotate(10deg); }
+        }
+
+        .celebration-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 60px;
+            color: white;
+            margin-top: 30px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            animation: textBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes textBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .celebration-message {
+            font-size: 28px;
+            color: white;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 40px;
+            }
+            .question {
+                font-size: 24px;
+            }
+            button {
+                padding: 15px 35px;
+                font-size: 22px;
+            }
+            .panda {
+                font-size: 90px;
+            }
+            .celebration-panda {
+                font-size: 120px;
+            }
+            .celebration-text {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Bamboo decoration -->
+    <div class="bamboo" style="left: 5%; top: 10%;">🎋</div>
+    <div class="bamboo" style="right: 5%; top: 20%;">🎋</div>
+    <div class="bamboo" style="left: 10%; bottom: 15%;">🎋</div>
+    <div class="bamboo" style="right: 8%; bottom: 10%;">🎋</div>
+
+    <div class="container">
+        <div class="panda-container">
+            <div class="panda-hearts heart-left">🤍</div>
+            <div class="panda">🐼</div>
+            <div class="panda-hearts heart-right">💗</div>
+        </div>
+        <div class="from-text">From: Your Amullu 🤗</div>
+        <h1>Dear Atchu! 💕</h1>
+        <p class="question">Will You Be My Valentine?</p>
+        
+        <div class="buttons-container">
+            <div class="buttons">
+                <button class="yes-btn" onclick="handleYes()">
+                    <span>Yes! 💖</span>
+                </button>
+                <button class="no-btn" id="noBtn" onmouseover="runAway()" ontouchstart="runAway()">
+                    <span>No 💔</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="attempt-counter" id="attemptCounter">
+            You've tried to click "No" <span id="attemptCount">0</span> times! 😄
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <div class="celebration-panda">🐼💕</div>
+        <div class="celebration-text">Yay! 🎉</div>
+        <div class="celebration-message">Taking you to something special...</div>
+    </div>
+
+    <script>
+        let attemptCount = 0;
+        let noBtnMoved = false;
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const hearts = ['🤍', '💗', '🤍', '💗', '🐼'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            document.getElementById('heartsContainer').appendChild(heart);
+
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        // Generate hearts periodically
+        setInterval(createHeart, 600);
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+
+        function runAway() {
+            const noBtn = document.getElementById('noBtn');
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            attemptCount++;
+            document.getElementById('attemptCount').textContent = attemptCount;
+            document.getElementById('attemptCounter').style.display = 'block';
+
+            // Calculate random position within container bounds
+            const maxX = containerRect.width - noBtn.offsetWidth - 40;
+            const maxY = containerRect.height - noBtn.offsetHeight - 40;
+            
+            let randomX = Math.random() * maxX;
+            let randomY = Math.random() * maxY;
+            
+            // Add some variety to the movement
+            if (attemptCount % 3 === 0) {
+                randomX = Math.random() < 0.5 ? -20 : maxX + 20;
+            }
+            if (attemptCount % 4 === 0) {
+                randomY = Math.random() < 0.5 ? -20 : maxY + 20;
+            }
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            // Funny messages based on attempt count
+            const messages = [
+                'Nice try! 😄',
+                'Almost got it! 🐼',
+                'Nope! 😆',
+                'Too slow! 🎋',
+                'Keep trying! 💕',
+                'Getting warmer... NOT! 😂',
+                'You\'re persistent! 🌸',
+                'Still no! 🐼💨',
+                'Maybe click Yes instead? 💖',
+                'The panda says no running! 🐼'
+            ];
+
+            if (attemptCount <= 10) {
+                const messageIndex = (attemptCount - 1) % messages.length;
+                console.log(messages[messageIndex]);
+            }
+
+            // Make Yes button bigger with each attempt
+            // Removed - user doesn't want Yes button to grow
+        }
+
+        function createConfetti() {
+            const colors = ['#ffffff', '#ffb3d9', '#d4a5d4', '#c084c0', '#8b2e5f', '#6a1b4d'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        function handleYes() {
+            // Show celebration screen
+            document.getElementById('celebration').style.display = 'flex';
+            
+            // Create confetti
+            createConfetti();
+            
+            // Redirect to celebration page
+            setTimeout(() => {
+                window.location.href = 'celebration.html';
+            }, 2000);
+        }
+
+        // Initial position for No button
+        window.addEventListener('load', () => {
+            const noBtn = document.getElementById('noBtn');
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Set initial absolute position that matches its current location
+            noBtn.style.left = 'calc(50% + 15px)';
+            noBtn.style.top = '50%';
+            noBtn.style.transform = 'translate(0, -50%)';
+        });
+    </script>
+</body>
+</html>
